@@ -4,3 +4,7 @@ node_modules
 projects/**/.DS_Store
 projects/**/dist
 yarn.lock
+.agents/*
+.opencode/*
+dist/*
+*.md

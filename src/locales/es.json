@@ -1,3 +1,71 @@
 {
-  
+  "nav": {
+    "devices": "Dispositivos",
+    "cart": "Carrito",
+    "shoppingCart": "Carrito de compras"
+  },
+  "cart": {
+    "add": "Añadir al carrito",
+    "adding": "Añadiendo...",
+    "added": "Añadido al carrito",
+    "error": "Error al añadir al carrito"
+  },
+  "search": {
+    "placeholder": "Buscar dispositivo..."
+  },
+  "device": {
+    "viewDetails": "Ver detalles",
+    "viewTable": "Ver tabla"
+  },
+  "deviceTable": {
+    "title": "Tabla de Dispositivos",
+    "subtitle": "Vista para comparar dispositivos",
+    "back": "Volver"
+  },
+  "deviceDetails": {
+    "backToDevices": "Volver a dispositivos",
+    "processor": "Procesador",
+    "ram": "Memoria RAM",
+    "storage": "Almacenamiento",
+    "os": "Sistema operativo",
+    "display": "Pantalla",
+    "battery": "Batería",
+    "camera": "Cámara principal",
+    "dimensions": "Dimensiones",
+    "weight": "Peso",
+    "selectColor": "Seleccionar color",
+    "selectStorage": "Seleccionar almacenamiento",
+    "inStock": "En stock - Entrega en 24-48h",
+    "freeShipping": "Envío gratis en 24-48 horas",
+    "freePickup": "Recogida en tienda gratis"
+  },
+  "empty": {
+    "noResults": "No se encontraron dispositivos",
+    "noDevices": "No hay dispositivos disponibles",
+    "clearFilters": "Limpiar filtros"
+  },
+  "loading": "Cargando...",
+  "loadingDevices": "Cargando dispositivos...",
+  "error": {
+    "retry": "Reintentar",
+    "reload": "Recargar detalles",
+    "generic": "Algo salió mal",
+    "loadingDetails": "Ha habido un error al obtener los dispositivos"
+  },
+  "common": {
+    "productImage": "Imagen del producto",
+    "technicalSpecs": "Características técnicas"
+  },
+  "table": {
+    "searchPlaceholder": "🔍 Buscar...",
+    "noResults": "No se encontraron resultados",
+    "previous": "← Anterior",
+    "next": "Siguiente →",
+    "pageInfo": "Página {{page}} de {{totalPages}} ({{totalResults}} resultados)"
+  },
+  "language": {
+    "select": "Idioma",
+    "es": "Español",
+    "en": "English"
+  }
 }

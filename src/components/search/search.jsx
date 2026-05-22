@@ -1,24 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import './search.scss';
-import PropTypes from 'prop-types';
 
 const Search = ({ valueSearch, setValue }) => {
+  const { t } = useTranslation();
+
   return (
     <form className="search-container">
       <input
         type="text"
-        placeholder="Buscar dispositivos"
+        placeholder={t('search.placeholder')}
         value={valueSearch}
         onChange={(e) => setValue(e.target.value)}
         className="search-input"
-        aria-label="Buscar libro"
+        aria-label={t('search.placeholder')}
       />
     </form>
   );
-};
-
-Search.propTypes = {
-  valueSearch: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired,
 };
 
 export default Search;

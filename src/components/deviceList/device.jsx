@@ -1,34 +1,60 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CURRENCY } from '../../constants';
+import { useTranslation } from 'react-i18next';
+
 const Device = ({ device }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
-    <section
+    <article
       className="device-card"
       onClick={() => navigate(`/deviceDetails/${device.id}`)}
-      aria-label="Ver detalles del dispositivo"
+      role="button"
+      tabIndex={0}
+      aria-label={`${t('device.viewDetails')} ${device.brand} ${device.model}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          navigate(`/deviceDetails/${device.id}`);
+        }
+      }}
     >
-      <img
-        className="device-card-image"
-        alt="image of device"
-        src={device.imgUrl}
-      />
-      <div className="device-card-info">
-        <p className="device-card-model">{device.brand} :</p>
-        <p className="device-card-model">{device.model}</p>
+      <div className="device-card-image-container">
+        <img
+          className="device-card-image"
+          alt={`${device.brand} ${device.model}`}
+          src={device.imgUrl}
+          loading="lazy"
+          width={80}
+          height={80}
+        />
       </div>
-      <p className="device-card-info device-card-info-price">
-        {device.price || 100} {CURRENCY}
-      </p>
-    </section>
+
+      <div className="device-card-content">
+        <span className="device-card-brand">{device.brand}</span>
+        
+        <h3 className="device-card-model">{device.model}</h3>
+
+        <div className="device-card-specs">
+          {device.ram && <span className="spec-tag">{device.ram}</span>}
+          {device.internalMemory?.[0] && (
+            <span className="spec-tag">{device.internalMemory[0]}</span>
+          )}
+          {device.os && <span className="spec-tag">{device.os}</span>}
+        </div>
+
+        <div className="device-card-price">
+          <span className="price-amount">{device.price || '—'}</span>
+          <span className="price-currency">€</span>
+        </div>
+      </div>
+
+      <div className="device-card-cta">
+        <span className="cta-text">{t('device.viewDetails')}</span>
+        <span className="cta-arrow" aria-hidden="true">›</span>
+      </div>
+    </article>
   );
 };
 
-Device.propTypes = {
-  device: PropTypes.object.isRequired,
-};
-
-export default React.memo(Device);
+export default memo(Device);

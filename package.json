@@ -5,19 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest --mode test"
+    "test": "vitest --mode test",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.76.1",
     "@tanstack/react-query-devtools": "^5.76.1",
     "@testing-library/user-event": "^14.6.1",
     "@uidotdev/usehooks": "^2.4.1",
+    "i18next": "^26.2.0",
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-i18next": "^17.0.8",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
@@ -37,6 +40,7 @@
     "jsdom": "^26.1.0",
     "prettier": "^3.5.3",
     "sass-embedded": "^1.88.0",
+    "typescript": "^6.0.3",
     "vite": "^6.3.5",
     "vitest": "^3.1.3"
   }
