@@ -1,0 +1,29 @@
+@use '../../style/mixins.scss' as *;
+
+.header {
+  @include d-flex(row, initial, center, 46px);
+  padding: 10px 20px;
+  background-color: var(--color-header-bg);
+  &-logo {
+    height: 40px;
+    width: auto;
+  }
+  &-cart {
+    @include d-flex(row, center, center, 10px);
+    img {
+      width: 3vw;
+    }
+    &-count {
+      display: inline-block;
+      padding: 0px 8px;
+      border: 1px solid var(--color-red);
+      border-radius: 50%;
+      text-align: center;
+      position: absolute;
+      top: 1%;
+      right: 4%;
+      z-index: 1;
+      background: var(--color-black);
+    }
+  }
+}

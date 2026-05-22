@@ -1,0 +1,48 @@
+@mixin d-flex(
+  $flexDirection: row,
+  $justifyContent: initial,
+  $alignItems: initial,
+  $gap: 0px
+) {
+  display: flex;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  gap: $gap;
+}
+
+/* SCROLLBAR */
+@mixin scrollbar-webkit(
+  $width: 5px,
+  $background-track: #ffffff,
+  $background-thumb: #888,
+  $background-hover: #555
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $background-track;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $background-thumb;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $background-hover;
+  }
+  &::-webkit-scrollbar-thumb:horizontal {
+    background: $background-track;
+  }
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+}

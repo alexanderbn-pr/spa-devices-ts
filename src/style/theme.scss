@@ -1,0 +1,113 @@
+@use './mixins' as *;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: --color-text-main;
+  background-color: --color-bg-main;
+
+  --color-bg-main: #242424;
+  --color-text-main: rgba(255, 255, 255, 0.87);
+  --color-primary: #3fa7ff;
+  --color-disabled-bg: #444c56;
+  --color-disabled-text: #b0bec5;
+  --color-border: #ddd;
+  --color-red: rgb(184, 117, 117);
+  --color-header-bg: rgba(0, 0, 0, 0.8);
+  --color-black: black;
+  --color-white: white;
+}
+
+body {
+  display: block;
+  margin: 0;
+}
+
+#root {
+  display: grid;
+  box-sizing: border-box;
+  grid-template: 'header' 8vh 'main' 92% / 100%;
+
+  header {
+    grid-area: header;
+  }
+  aside {
+    grid-area: sidebar;
+  }
+  main {
+    grid-area: main;
+  }
+  footer {
+    grid-area: footer;
+  }
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.2em;
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: 1.3em;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 0.9em;
+  line-height: 1.25;
+}
+
+input {
+  padding: 0.625rem;
+  border: 0.125rem solid --color-border;
+  height: 40%;
+}
+
+button {
+  border: 1px solid --color-primary;
+  background: transparent;
+  text-transform: uppercase;
+  padding: 1vw 1vh;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.8rem;
+  width: 20vw;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  letter-spacing: 0.5px;
+  &:hover:not(:disabled) {
+    background: --color-primary;
+    transform: translateY(-2px) scale(1.03);
+  }
+  &:disabled {
+    background: --color-disabled-bg;
+    color: --color-disabled-text;
+    border: none;
+    cursor: not-allowed;
+  }
+}
+.loading {
+  text-align: center;
+  padding-top: 4vh;
+}

@@ -1,0 +1,120 @@
+@use '../../style/mixins.scss' as *;
+
+.details-view {
+  @include d-flex(row, center, flex-start, 2.5rem);
+  border-radius: 16px;
+  margin: 4vh auto 0 auto;
+  width: 78%;
+  box-sizing: border-box;
+
+  &-container {
+    @include d-flex(column, initial, initial, 1.2rem);
+    background: #23272b;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 40vw;
+    min-width: 30vw;
+    min-height: 15.9vh;
+  }
+  &-image {
+    @include d-flex(column, initial, center, 1rem);
+    width: 38vw;
+    min-width: 16vw;
+    max-width: 30vw;
+    height: 42vh;
+    min-height: 10vh;
+    max-height: 43vh;
+    h3 {
+      font-weight: bold;
+      color: var(--color-red);
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+  }
+  &-side {
+    @include d-flex(column, initial, initial, 2rem);
+    flex: 1;
+    &-text {
+      p {
+        font-size: 1.08rem;
+        color: #e3e6ea;
+        span {
+          font-weight: 600;
+          color: var(--color-primary);
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+  &-actions {
+    gap: 1.2rem;
+    width: 100%;
+    align-items: center;
+    &-selects {
+      @include d-flex(row, space-between, center, 2rem);
+      width: 100%;
+      span {
+        width: 9vw;
+      }
+      select {
+        padding: 0.7em 2.5em 0.7em 1em;
+        border-radius: 8px;
+        border: 1px solid #3fa7ff;
+        font-size: 1rem;
+        background: #181a1b;
+        color: #e3e6ea;
+        width: 100%;
+        box-sizing: border-box;
+        &:focus {
+          border: 1.5px solid #3fa7ff;
+          outline: none;
+          box-shadow: 0 0 0 2px #3fa7ff33;
+        }
+        option {
+          background: #23272b;
+          color: #e3e6ea;
+        }
+      }
+    }
+  }
+
+  @include respond(tablet) {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem;
+    gap: 1.5rem;
+    &-image {
+      width: 80vw;
+      max-width: 340px;
+      min-width: 120px;
+      height: 220px;
+    }
+    &-side-text,
+    &-actions {
+      max-width: 95vw;
+      min-width: 0;
+      height: auto;
+    }
+  }
+  @include respond(phone) {
+    padding: 0.5rem;
+    &-image {
+      width: 95vw;
+      height: 160px;
+      min-width: 80px;
+      min-height: 80px;
+    }
+    &-side-text,
+    &-actions {
+      padding: 1rem 0.5rem;
+      max-width: 100vw;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use '../../style/mixins.scss' as *;
+
+.breadcrumb {
+  @include d-flex(row, initial, center, 10px);
+  font-size: 1rem;
+  color: var(--color-white);
+  width: 84vw;
+  a {
+    color: var(--color-white);
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  span {
+    color: var(--color-white);
+  }
+}
