@@ -1,13 +1,19 @@
-import Toast from './Toast';
+import type { Toast } from '../../types';
+import ToastComponent from './Toast';
 import './Toast.scss';
 
-const ToastContainer = ({ toasts, onDismiss }) => {
+interface ToastContainerProps {
+  toasts: Toast[];
+  onDismiss: (id: string) => void;
+}
+
+const ToastContainer = ({ toasts, onDismiss }: ToastContainerProps) => {
   if (!toasts || toasts.length === 0) return null;
 
   return (
     <div className="toast-container" aria-label="Notificaciones">
       {toasts.map((toast) => (
-        <Toast
+        <ToastComponent
           key={toast.id}
           id={toast.id}
           type={toast.type}

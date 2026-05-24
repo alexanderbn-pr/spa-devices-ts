@@ -1,7 +1,6 @@
 import { Link, useLocation, useMatch } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useBreadcrumbDevice } from '../../hooks/useBreadcrumbDevice';
-
 import './breadcrumb.scss';
 
 const Breadcrumbs = () => {

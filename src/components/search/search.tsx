@@ -1,7 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import './search.scss';
 
-const Search = ({ valueSearch, setValue }) => {
+interface SearchProps {
+  valueSearch: string;
+  setValue: (v: string) => void;
+}
+
+const Search = ({ valueSearch, setValue }: SearchProps) => {
   const { t } = useTranslation();
 
   return (

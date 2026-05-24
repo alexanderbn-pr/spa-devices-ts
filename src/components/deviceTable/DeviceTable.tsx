@@ -13,13 +13,11 @@ interface DeviceTableProps {
   devices: Device[];
 }
 
-type DeviceRecord = Device & Record<string, unknown>;
-
 /**
  * Column configuration for the device table
  * Columns: imgUrl, brand, model, price
  */
-const deviceColumns: Column<DeviceRecord>[] = [
+const deviceColumns: Column<Device>[] = [
   {
     key: 'imgUrl',
     label: 'Imagen',
@@ -74,7 +72,7 @@ const deviceColumns: Column<DeviceRecord>[] = [
 export function DeviceTable({ devices }: DeviceTableProps) {
   const navigate = useNavigate();
 
-  const handleRowClick = (device: DeviceRecord) => {
+  const handleRowClick = (device: Device) => {
     navigate(`/deviceDetails/${device.id}`);
   };
 
@@ -84,7 +82,7 @@ export function DeviceTable({ devices }: DeviceTableProps) {
     paginated: true,
     pageSize: 15,
     searchable: true,
-    searchableFields: ['brand' as const, 'model' as const],
+    searchableFields: ['brand', 'model'] as (keyof Device)[],
     debounceMs: 300,
     sortable: true,
     striped: true,

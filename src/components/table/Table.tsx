@@ -4,15 +4,17 @@
 
 import { useTranslation } from 'react-i18next';
 import { useTableState } from '../../hooks/useTableState';
+import type { TableConfig } from '../../types/table.types';
 import './Table.scss';
+
+interface TableProps<T extends Record<string, unknown>> {
+  config: TableConfig<T>;
+}
 
 /**
  * Generic table component
- * @param {Object} props
- * @param {import('../../types/table').TableConfig<T>} props.config - table configuration
- * @returns {JSX.Element}
  */
-export function Table({ config }) {
+export function Table<T extends Record<string, unknown>>({ config }: TableProps<T>) {
   const { t } = useTranslation();
   const { state, actions, data } = useTableState(config);
 
@@ -39,7 +41,7 @@ export function Table({ config }) {
               {config.columns.map((col) => (
                 <th
                   key={String(col.key)}
-                  onClick={() => col.sortable && actions.setSortBy(col.key)}
+                  onClick={() => col.sortable && actions.setSortBy(col.key as string)}
                   className={`${col.sortable ? 'sortable' : ''} ${col.className || ''}`}
                   style={{ width: col.width, cursor: col.sortable ? 'pointer' : 'default' }}
                 >

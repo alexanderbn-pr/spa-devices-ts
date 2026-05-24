@@ -1,4 +1,13 @@
-const Toast = ({ id, type, message, onDismiss }) => {
+import { ToastType } from '../../types';
+
+interface ToastProps {
+  id: string;
+  type: ToastType;
+  message: string;
+  onDismiss: (id: string) => void;
+}
+
+const Toast = ({ id, type, message, onDismiss }: ToastProps) => {
   const handleDismiss = () => {
     onDismiss(id);
   };

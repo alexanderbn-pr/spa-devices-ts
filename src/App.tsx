@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,9 +16,9 @@ import { ToastRenderer } from './components/toast/ToastProvider';
 import './i18n';
 
 // Route-based code splitting — each page loads only when needed
-const Device = lazy(() => import('./features/devices/pages/device/DevicePage'));
-const DeviceDetails = lazy(() => import('./features/devices/pages/deviceDetails/DeviceDetailsPage'));
-const DeviceTable = lazy(() => import('./features/devices/pages/deviceTable/DeviceTablePage'));
+const Device = lazy(() => import('./features/devices/pages/device/DevicePage')) as ComponentType<object>;
+const DeviceDetails = lazy(() => import('./features/devices/pages/deviceDetails/DeviceDetailsPage')) as ComponentType<object>;
+const DeviceTable = lazy(() => import('./features/devices/pages/deviceTable/DeviceTablePage')) as ComponentType<object>;
 
 // Loading fallback for Suspense
 function LoadingFallback() {

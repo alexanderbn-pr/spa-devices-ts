@@ -1,11 +1,11 @@
-import './header.scss';
-import logo from '../../assets/icons/logo.png';
-import cart from '../../assets/icons/cart.png';
-import Breadcrumbs from '../breadcrumb/Breadcrumb';
-import { useCart } from '../../hooks/useCart';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useCart } from '../../hooks/useCart';
+import Breadcrumbs from '../breadcrumb/Breadcrumb';
 import LanguageSelector from '../ui/LanguageSelector';
+import logo from '../../assets/icons/logo.png';
+import cart from '../../assets/icons/cart.png';
+import './header.scss';
 
 const Header = () => {
   const { cartItemsCount } = useCart();
@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="header">
       <Link
-        to={location.pathname === '/device' ? undefined : '/device'}
+        to="/device"
         onClick={(e) => {
           if (location.pathname === '/device') e.preventDefault();
         }}

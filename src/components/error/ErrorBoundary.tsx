@@ -1,33 +1,43 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Component, type ReactNode, type ErrorInfo } from 'react';
 import i18n from '../../i18n';
 import './ErrorBoundary.scss';
+
+interface ErrorBoundaryProps {
+  children: ReactNode;
+  fallback?: ReactNode;
+  onReset?: () => void;
+  level?: 'section' | 'page' | 'full';
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
 
 /**
  * ErrorBoundary — Pure class component that catches render errors.
  */
-class ErrorBoundary extends Component {
-  constructor(props) {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(): ErrorBoundaryState {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     console.error('ErrorBoundary caught:', error, errorInfo);
   }
 
-  handleReset = () => {
+  handleReset = (): void => {
     this.setState({ hasError: false });
     if (this.props.onReset) {
       this.props.onReset();
     }
   };
 
-  render() {
+  render(): ReactNode {
     if (this.state.hasError) {
       if (this.props.fallback) {
         return this.props.fallback;

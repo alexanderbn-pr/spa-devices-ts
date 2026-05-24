@@ -7,6 +7,7 @@ export interface Device {
   ram?: string;
   internalMemory?: string[];
   os?: string;
+  [key: string]: unknown;
 }
 
 export interface DeviceDetails extends Device {
