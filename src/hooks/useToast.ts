@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useToastContext } from '../contexts/ToastContext';
 
-interface ToastOptions {
+type ToastOptions = {
   duration?: number;
 }
 

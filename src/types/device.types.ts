@@ -20,7 +20,7 @@ export interface DeviceDetails extends Device {
   colors: string[];
 }
 
-export interface DeviceOption {
+export type DeviceOption = {
   value: string;
   label: string;
 }

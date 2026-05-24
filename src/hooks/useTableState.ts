@@ -7,7 +7,7 @@ import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { filterData, sortData, paginateData } from '../utils/table-helpers';
 import type { TableConfig, TableState, Column } from '../types/table.types';
 
-interface TableActions {
+type TableActions = {
   setSearch: (value: string) => void;
   setFilter: (key: string, value: unknown) => void;
   clearFilters: () => void;
@@ -17,7 +17,7 @@ interface TableActions {
   toggleRowSelection: (index: number) => void;
 }
 
-interface ProcessedData<T extends Record<string, unknown>> {
+type ProcessedData<T extends Record<string, unknown>> = {
   items: T[];
   totalPages: number;
   totalFiltered: number;

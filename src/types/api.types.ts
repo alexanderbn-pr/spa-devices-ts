@@ -6,7 +6,7 @@ export const ToastType = {
 
 export type ToastType = (typeof ToastType)[keyof typeof ToastType];
 
-export interface ShowToastParams {
+export type ShowToastParams = {
   type: ToastType;
   message: string;
   duration?: number;

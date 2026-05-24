@@ -1,17 +1,17 @@
 export type Language = 'es' | 'en';
 
-export interface BreadcrumbItem {
+export type BreadcrumbItem = {
   label: string;
   href?: string;
 }
 
-export interface SearchFilters {
+export type SearchFilters = {
   searchName: string;
   setSearchName: (value: string) => void;
   debouncedFilterName: string;
 }
 
-export interface EmptyStateAction {
+export type EmptyStateAction = {
   label: string;
   onClick: () => void;
 }

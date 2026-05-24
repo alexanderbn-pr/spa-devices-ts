@@ -1,4 +1,4 @@
-export interface QueryKeys {
+export type QueryKeys = {
   devices: {
     all: readonly ['devices'];
     lists: () => readonly ['devices', 'list'];

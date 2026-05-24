@@ -5,7 +5,7 @@ export interface CartContextValue {
   setCartItemsCount: Dispatch<SetStateAction<number>>;
 }
 
-export interface AddToCartPayload {
+export type AddToCartPayload = {
   id: string;
   colorCode: string;
   storageCode: string;

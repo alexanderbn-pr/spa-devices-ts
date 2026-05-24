@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export interface Column<T extends Record<string, unknown>> {
+export type Column<T extends Record<string, unknown>> = {
   key: keyof T;
   label: string;
   dataType?: 'string' | 'number' | 'date' | 'boolean' | 'custom';
@@ -12,7 +12,7 @@ export interface Column<T extends Record<string, unknown>> {
   sortFn?: (a: T, b: T) => number;
 }
 
-export interface TableConfig<T extends Record<string, unknown>> {
+export type TableConfig<T extends Record<string, unknown>> = {
   data: T[];
   columns: Column<T>[];
   paginated?: boolean;
@@ -27,7 +27,7 @@ export interface TableConfig<T extends Record<string, unknown>> {
   onRowClick?: (row: T) => void;
 }
 
-export interface TableState<T extends Record<string, unknown>> {
+export type TableState<T extends Record<string, unknown>> = {
   search: string;
   inputValue: string;
   filters: Record<string, unknown>;
