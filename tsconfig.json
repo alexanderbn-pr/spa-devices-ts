@@ -9,6 +9,7 @@
     "verbatimModuleSyntax": true,
     "noEmit": true,
     "moduleDetection": "force",
+    "allowJs": true,
     "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": false,
