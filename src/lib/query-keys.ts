@@ -1,9 +1,5 @@
 import type { QueryKeys } from '../types/query-keys.types';
 
-/**
- * Query Key Factory - Patrón centralizado para todas las query keys
- * Asegura consistencia y previene bugs de caché
- */
 export const queryKeys = {
   devices: {
     all: ['devices'] as const,

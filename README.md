@@ -1,105 +1,133 @@
-# SPA Devices — React 19 Device Catalog
+# spa-devices-ts
 
-A React 19 single-page application for browsing and comparing mobile devices, featuring a product catalog with search, filtering, and detail views.
+Device catalog SPA for browsing, searching, and managing mobile devices. Built with React 19 + TypeScript 6 + Vite 6.
 
-## Prerequisites
+## Tech Stack
 
-- **Node.js**: `>=18.0.0` (LTS recommended)
-- **Package Manager**: npm (bundled with Node.js) or pnpm/yarn
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 19 |
+| Language | TypeScript 6 (strict mode) |
+| Bundler | Vite 6 |
+| Server State | TanStack Query 5 |
+| Routing | React Router v7 |
+| Styling | SCSS (BEM) — Apple-inspired design |
+| Testing | Vitest 3 + React Testing Library |
+| Linting | ESLint 9 (flat config) + typescript-eslint |
+| i18n | i18next + react-i18next (ES/EN) |
 
-## Installation
+## Features
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd spa-devices
-   ```
+- **Device Catalog** — Browse mobile devices with search, filter, sort, and pagination
+- **Device Details** — View specifications, select color/storage options, add to cart
+- **Shopping Cart** — Track cart count across sessions (localStorage)
+- **Internationalization** — Spanish / English with i18next
+- **Responsive Design** — Apple-inspired UI with SF Pro typography
+- **Suspense + Skeletons** — Loading states for all async operations
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+## Getting Started
 
-3. **Configure environment variables** (if applicable)
-   ```bash
-   # Copy example env file if available
-   cp .env.example .env.local
-   # Edit with your API URLs and keys
-   ```
+```bash
+# Install dependencies
+npm install
 
-4. **Start development server**
-   ```bash
-   npm run dev
-   ```
+# Development server
+npm run dev
 
-The application will be available at `http://localhost:5173`
+# Production build
+npm run build
 
-## Available Scripts
+# Preview production build
+npm run preview
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start Vite development server with HMR |
-| `npm run build` | Create production build (output: `dist/`) |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint with auto-fix for JS/JSX |
-| `npm run test` | Run tests in watch mode |
-| `npm run test:run` | Run tests once (CI mode) |
+# Type check
+npm run tsc
 
-## Architecture Overview
+# Run tests (watch mode)
+npm run test
 
-### Tech Stack
+# Run tests (single run)
+npm run test:run
 
-| Technology | Purpose |
-|------------|---------|
-| **JavaScript ES6 + PropTypes** | Core language with runtime type checking |
-| **React 19** | UI framework with concurrent features |
-| **Vite** | Build tool and dev server |
-| **TanStack Query** | Server state management |
-| **React Router v7** | Client-side routing |
-| **SCSS + BEM** | Styling with CSS preprocessor |
+# Lint
+npm run lint
+```
 
-### Folder Structure
+## Environment Variables
+
+Create a `.env` file at the project root:
+
+```env
+VITE_DEVICE_API_URL=https://your-api-url.com
+```
+
+## Architecture
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── ui/              # Generic UI (Card, EmptyState, SkipLink)
-│   ├── header/          # App header with navigation
-│   ├── search/          # Search component with debounce
-│   ├── deviceList/      # Device listing components
-│   └── ...
-├── features/            # Feature-based modules
-│   └── devices/         # Devices feature
-│       ├── pages/       # Page components
-│       │   ├── device/          # Device list page
-│       │   ├── deviceDetails/   # Device detail page
-│       │   └── deviceTable/     # Device comparison table
-│       └── ...
-├── hooks/               # Custom React hooks
-├── services/            # API layer (device, cart services)
+├── components/          # Shared UI components
+│   ├── breadcrumb/
+│   ├── deviceList/
+│   ├── deviceTable/
+│   ├── error/
+│   ├── header/
+│   ├── search/
+│   ├── table/
+│   ├── toast/
+│   └── ui/
 ├── contexts/            # React contexts (Toast)
-├── styles/             # Global SCSS and mixins
-├── constants/          # App constants (currency, weights)
-├── locales/             # i18n translation files (es, en)
-└── i18n/               # i18n configuration
+├── features/devices/    # Device domain
+│   └── pages/
+├── hooks/               # Custom hooks
+│   └── mocks/           # Test mock data
+├── lib/                 # Query key factory
+├── services/            # API layer
+├── types/               # TypeScript types
+├── utils/               # Pure utilities
+├── i18n/                # i18n configuration
+├── locales/             # Translation files (es.json, en.json)
+└── styles/              # Global SCSS
+```
+
+### Data Flow
+
+```
+API (fetch) → Services (typed) → Custom Hooks (TanStack Query) → Pages → Components
 ```
 
 ### Key Patterns
 
-#### Data Fetching (TanStack Query)
-- Server state managed via `useDevices()`, `useDeviceDetails()`, `useCart()`
-- Suspense boundaries for loading states
-- ErrorBoundary for error handling
+- **Feature-based organization**: device domain has its own pages under `features/devices/`
+- **Container/Presentational**: pages handle data, components render UI
+- **Typed API layer**: services use `unknown` + type guards, never `any`
+- **Suspense**: all async data uses `useSuspenseQuery` with skeleton fallbacks
+- **Query Key Factory**: centralized, type-safe query key management
 
-#### Component Architecture
-- **Container/Presentational**: Smart containers connect to data, presentational components render UI
-- **Compound Components**: `<Card><Card.Image /><Card.Body /></Card>`
-- **Custom Hooks**: `useDevicesSearch()` handles search state + debounce
+## TypeScript Conventions
 
-#### State Management
-- **Server State**: TanStack Query (devices, cart)
-- **Client State**: React hooks + Context (Toast notifications)
-- **URL State**: React Router (route params for device details)
+- `interface` for component props, domain models, context values
+- `type` for unions, DTOs, utility shapes, generic configuration
+- Bounded generics: `<T extends Record<string, unknown>>`
+- `as const` for literal types and query keys
+- `satisfies` for mock data validation without widening
+- **Zero `any`**: ESLint `no-explicit-any: error` enforced
+- Inferred return types preferred over explicit annotations
+
+## Testing
+
+- Framework: Vitest + React Testing Library
+- Mock patterns: `vi.mock()` + `vi.mocked()`
+- Mock data: `satisfies` keyword for type safety
+- Coverage: `npm run test:coverage`
+
+## Design System
+
+Apple-inspired design. See `DESIGN.md` for full reference.
+
+- Primary CTA: `#0071e3`
+- Page background: `#f5f5f7`
+- Typography: SF Pro Display / SF Pro Text
+- Cards: `rgba(0,0,0,0.22) 3px 5px 30px 0px`
 
 ## Development Guidelines
 

@@ -6,9 +6,6 @@ import { useToast } from './useToast';
 import { useTranslation } from 'react-i18next';
 import type { AddToCartPayload } from '../types/cart.types';
 
-/**
- * Hook for adding a device to the cart
- */
 export const useCart = () => {
   const { cartItemsCount, setCartItemsCount } = useCartContext();
   const { toast } = useToast();

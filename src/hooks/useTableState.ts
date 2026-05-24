@@ -1,8 +1,3 @@
-/**
- * Custom hook for generic table state
- * Follows react-table skill patterns
- */
-
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { filterData, sortData, paginateData } from '../utils/table-helpers';
 import type { TableConfig, TableState, Column } from '../types/table.types';
@@ -23,9 +18,6 @@ type ProcessedData<T extends Record<string, unknown>> = {
   totalFiltered: number;
 }
 
-/**
- * Hook for managing table state with filtering, sorting and pagination
- */
 export function useTableState<T extends Record<string, unknown>>(
   config: TableConfig<T>,
 ): { state: TableState<T>; actions: TableActions; data: ProcessedData<T> } {

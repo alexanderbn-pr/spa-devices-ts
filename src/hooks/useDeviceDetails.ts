@@ -4,10 +4,6 @@ import { queryKeys } from '../lib/query-keys';
 import { EXPIRATION } from '../constants';
 import type { DeviceDetails } from '../types/device.types';
 
-/**
- * Hook for fetching details of a specific device.
- * Only handles fetching with TanStack Query.
- */
 export const useDeviceDetails = (id: string | undefined) => {
   const {
     data: deviceDetails,

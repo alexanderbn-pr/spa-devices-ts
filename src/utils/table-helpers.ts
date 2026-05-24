@@ -3,9 +3,6 @@
  * Follows react-table skill patterns
  */
 
-/**
- * Filters data by search term across specific fields
- */
 export function filterData<T extends Record<string, unknown>>(
   data: T[],
   search: string,
@@ -13,7 +10,6 @@ export function filterData<T extends Record<string, unknown>>(
   additionalFilters?: Record<string, unknown>,
 ): T[] {
   return data.filter((item) => {
-    // Search filtering
     if (search.trim()) {
       const matchesSearch = searchFields.some((field) =>
         String(item[field] ?? '')
@@ -23,7 +19,6 @@ export function filterData<T extends Record<string, unknown>>(
       if (!matchesSearch) return false;
     }
 
-    // Additional filters
     if (additionalFilters) {
       for (const [key, value] of Object.entries(additionalFilters)) {
         if (value === null || value === undefined) continue;
@@ -35,9 +30,6 @@ export function filterData<T extends Record<string, unknown>>(
   });
 }
 
-/**
- * Sorts data by field and order
- */
 export function sortData<T extends Record<string, unknown>>(
   data: T[],
   sortBy: keyof T,
@@ -53,12 +45,10 @@ export function sortData<T extends Record<string, unknown>>(
     const valueA = a[sortBy];
     const valueB = b[sortBy];
 
-    // Handle null/undefined
     if (valueA == null && valueB == null) return 0;
     if (valueA == null) return 1;
     if (valueB == null) return -1;
 
-    // Type-based sorting
     switch (dataType) {
       case 'number': {
         return order === 'asc'
@@ -85,9 +75,6 @@ export function sortData<T extends Record<string, unknown>>(
   });
 }
 
-/**
- * Paginates data
- */
 export function paginateData<T extends Record<string, unknown>>(
   data: T[],
   page: number,

@@ -1,7 +1,3 @@
-/**
- * Reusable generic table with sorting, filtering and pagination
- */
-
 import { useTranslation } from 'react-i18next';
 import { useTableState } from '../../hooks/useTableState';
 import type { TableConfig } from '../../types/table.types';
@@ -11,9 +7,6 @@ interface TableProps<T extends Record<string, unknown>> {
   config: TableConfig<T>;
 }
 
-/**
- * Generic table component
- */
 export function Table<T extends Record<string, unknown>>({ config }: TableProps<T>) {
   const { t } = useTranslation();
   const { state, actions, data } = useTableState(config);
