@@ -8,14 +8,15 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DevicePage from './DevicePage';
+import type { ReactNode } from 'react';
 
 // Mock i18n — partial mock to keep initReactI18next for i18n module
 vi.mock('react-i18next', async (importOriginal) => {
-  const actual = await importOriginal();
+  const actual = await importOriginal<typeof import('react-i18next')>();
   return {
     ...actual,
     useTranslation: () => {
-      const translations = {
+      const translations: Record<string, string> = {
         'nav.devices': 'Dispositivos',
         'device.viewTable': 'Ver Tabla',
         'device.all': 'Todos los dispositivos',
@@ -28,7 +29,7 @@ vi.mock('react-i18next', async (importOriginal) => {
         'empty.clearFilters': 'Limpiar filtros',
       };
       return {
-        t: (key) => translations[key] || key,
+        t: (key: string) => translations[key] || key,
       };
     },
   };
@@ -77,16 +78,13 @@ function getWrapper() {
     defaultOptions: {
       queries: {
         retry: false,
-        suspense: true,
       },
     },
   });
 
-  return ({ children }) => (
+  return ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/device']}>
-        {children}
-      </MemoryRouter>
+      <MemoryRouter initialEntries={['/device']}>{children}</MemoryRouter>
     </QueryClientProvider>
   );
 }
@@ -158,7 +156,9 @@ describe('DevicePage — PLP Integration', () => {
 
     // Empty state should show (no devices loaded yet)
     await waitFor(() => {
-      expect(screen.getByText('No hay dispositivos disponibles')).toBeInTheDocument();
+      expect(
+        screen.getByText('No hay dispositivos disponibles'),
+      ).toBeInTheDocument();
     });
   });
 

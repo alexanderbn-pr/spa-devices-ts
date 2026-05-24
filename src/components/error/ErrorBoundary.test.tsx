@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import type { ReactNode } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 
 /**
@@ -11,7 +12,7 @@ function GoodComponent() {
   return <p>Hello from safe component</p>;
 }
 
-function BadComponent() {
+function BadComponent(): ReactNode {
   throw new Error('Something went wrong');
 }
 
@@ -75,7 +76,9 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>,
     );
 
-    expect(screen.getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Reintentar' }),
+    ).toBeInTheDocument();
 
     consoleSpy.mockRestore();
   });

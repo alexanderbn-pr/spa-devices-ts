@@ -9,14 +9,16 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DeviceDetailsPage from './DeviceDetailsPage';
+import type { ReactNode } from 'react';
+import type { DeviceDetails } from '../../../../types';
 
 // Mock i18n — partial mock to keep initReactI18next for i18n module
 vi.mock('react-i18next', async (importOriginal) => {
-  const actual = await importOriginal();
+  const actual = await importOriginal<typeof import('react-i18next')>();
   return {
     ...actual,
     useTranslation: () => {
-      const translations = {
+      const translations: Record<string, string> = {
         'cart.add': 'Añadir al carrito',
         'cart.adding': 'Añadiendo...',
         'common.productImage': 'Imagen del producto',
@@ -36,22 +38,24 @@ vi.mock('react-i18next', async (importOriginal) => {
         'deviceDetails.freeShipping': 'Envío gratis',
         'deviceDetails.freePickup': 'Recogida gratis',
         'deviceDetails.backToDevices': 'Volver a dispositivos',
-      'error.loadingDetails': 'Ha habido un error al obtener los dispositivos',
-      'error.reload': 'Recargar detalles',
+        'error.loadingDetails':
+          'Ha habido un error al obtener los dispositivos',
+        'error.reload': 'Recargar detalles',
       };
       return {
-        t: (key) => translations[key] || key,
+        t: (key: string) => translations[key] || key,
       };
     },
   };
 });
 
 // Mutable mock references
-const { mockUseDeviceDetails, mockUseDeviceOptions, mockUseCart } = vi.hoisted(() => ({
-  mockUseDeviceDetails: vi.fn(),
-  mockUseDeviceOptions: vi.fn(),
-  mockUseCart: vi.fn(),
-}));
+const { mockUseDeviceDetails, mockUseDeviceOptions, mockUseCart } =
+  vi.hoisted(() => ({
+    mockUseDeviceDetails: vi.fn(),
+    mockUseDeviceOptions: vi.fn(),
+    mockUseCart: vi.fn(),
+  }));
 
 vi.mock('../../../../hooks/useDeviceDetails', () => ({
   useDeviceDetails: mockUseDeviceDetails,
@@ -81,7 +85,7 @@ const mockDeviceDetails = {
   dimentions: '146.7 x 71.5 x 7.65 mm',
   weight: '174',
   colors: ['Negro', 'Blanco', 'Azul'],
-};
+} satisfies DeviceDetails;
 
 const mockDeviceOptions = {
   storages: [
@@ -109,9 +113,11 @@ function getWrapper() {
     },
   });
 
-  return ({ children }) => (
+  return ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/deviceDetails/ZmGrkLRPXOTpxsU4jjAcv']}>
+      <MemoryRouter
+        initialEntries={['/deviceDetails/ZmGrkLRPXOTpxsU4jjAcv']}
+      >
         <Routes>
           <Route path="/deviceDetails/:id" element={children} />
         </Routes>
@@ -160,9 +166,15 @@ describe('DeviceDetailsPage — PDP Integration', () => {
 
     await waitFor(() => {
       // Storage buttons by aria-label (avoid ambiguity with specs text)
-      expect(screen.getByRole('button', { name: '128GB' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: '64GB' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: '256GB' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: '128GB' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: '64GB' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: '256GB' }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -170,7 +182,9 @@ describe('DeviceDetailsPage — PDP Integration', () => {
     render(<DeviceDetailsPage />, { wrapper: getWrapper() });
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: '128GB' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: '128GB' }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -179,7 +193,9 @@ describe('DeviceDetailsPage — PDP Integration', () => {
     render(<DeviceDetailsPage />, { wrapper: getWrapper() });
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Añadir al carrito' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Añadir al carrito' }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -194,7 +210,9 @@ describe('DeviceDetailsPage — PDP Integration', () => {
     const user = userEvent.setup();
     render(<DeviceDetailsPage />, { wrapper: getWrapper() });
 
-    const addButton = await screen.findByRole('button', { name: 'Añadir al carrito' });
+    const addButton = await screen.findByRole('button', {
+      name: 'Añadir al carrito',
+    });
 
     await user.click(addButton);
 
@@ -214,10 +232,14 @@ describe('DeviceDetailsPage — PDP Integration', () => {
       getDeviceDetails: vi.fn(),
     });
 
-    const { container } = render(<DeviceDetailsPage />, { wrapper: getWrapper() });
+    const { container } = render(<DeviceDetailsPage />, {
+      wrapper: getWrapper(),
+    });
 
     // Should render skeleton elements (DeviceListSkeleton uses CSS class)
-    expect(container.querySelector('.device-card-skeleton')).toBeInTheDocument();
+    expect(
+      container.querySelector('.device-card-skeleton'),
+    ).toBeInTheDocument();
   });
 
   it('shows error state when fetch fails', () => {
@@ -231,7 +253,11 @@ describe('DeviceDetailsPage — PDP Integration', () => {
     render(<DeviceDetailsPage />, { wrapper: getWrapper() });
 
     // Error message and reload button should be visible
-    expect(screen.getByText('Ha habido un error al obtener los dispositivos')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Recargar detalles' })).toBeInTheDocument();
+    expect(
+      screen.getByText('Ha habido un error al obtener los dispositivos'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Recargar detalles' }),
+    ).toBeInTheDocument();
   });
 });

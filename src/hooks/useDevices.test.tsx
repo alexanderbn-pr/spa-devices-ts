@@ -22,7 +22,6 @@ function getWrapper() {
     defaultOptions: {
       queries: {
         retry: false,
-        suspense: true,
       },
     },
   });

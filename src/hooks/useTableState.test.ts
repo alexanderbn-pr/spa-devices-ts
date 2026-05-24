@@ -8,40 +8,66 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useTableState } from './useTableState';
 
 vi.mock('@uidotdev/usehooks', () => ({
-  useDebounce: (v) => v,
+  useDebounce: (v: unknown) => v,
 }));
 
 vi.mock('../utils/table-helpers', () => ({
-  filterData: vi.fn((data, search, searchFields) => {
-    if (!search.trim()) return data;
-    return data.filter((item) =>
-      searchFields.some((field) =>
-        String(item[field] ?? '').toLowerCase().includes(search.toLowerCase())
-      )
-    );
-  }),
-  sortData: vi.fn((data, sortBy, order) => {
-    if (!sortBy) return data;
-    return [...data].sort((a, b) => {
-      const valueA = a[sortBy];
-      const valueB = b[sortBy];
-      if (valueA == null && valueB == null) return 0;
-      if (valueA == null) return 1;
-      if (valueB == null) return -1;
-      const comparison = String(valueA).localeCompare(String(valueB));
-      return order === 'asc' ? comparison : -comparison;
-    });
-  }),
-  paginateData: vi.fn((data, page, pageSize) => {
-    const totalPages = Math.ceil(data.length / pageSize);
-    const start = (page - 1) * pageSize;
-    const items = data.slice(start, start + pageSize);
-    return { items, totalPages };
-  }),
+  filterData: vi.fn(
+    (
+      data: Record<string, unknown>[],
+      search: string,
+      searchFields: string[],
+    ) => {
+      if (!search.trim()) return data;
+      return data.filter((item) =>
+        searchFields.some((field) =>
+          String(item[field] ?? '')
+            .toLowerCase()
+            .includes(search.toLowerCase()),
+        ),
+      );
+    },
+  ),
+  sortData: vi.fn(
+    (
+      data: Record<string, unknown>[],
+      sortBy: string,
+      order: string,
+    ) => {
+      if (!sortBy) return data;
+      return [...data].sort((a, b) => {
+        const valueA = a[sortBy];
+        const valueB = b[sortBy];
+        if (valueA == null && valueB == null) return 0;
+        if (valueA == null) return 1;
+        if (valueB == null) return -1;
+        const comparison = String(valueA).localeCompare(String(valueB));
+        return order === 'asc' ? comparison : -comparison;
+      });
+    },
+  ),
+  paginateData: vi.fn(
+    (data: Record<string, unknown>[], page: number, pageSize: number) => {
+      const totalPages = Math.ceil(data.length / pageSize);
+      const start = (page - 1) * pageSize;
+      const items = data.slice(start, start + pageSize);
+      return { items, totalPages };
+    },
+  ),
 }));
 
+type MockDevice = {
+  id: string;
+  brand: string;
+  model: string;
+  price: number;
+  ram: string;
+  os: string;
+  imgUrl: string;
+};
+
 // Test data
-const mockDevices = [
+const mockDevices: MockDevice[] = [
   { id: '1', brand: 'Apple', model: 'iPhone 13', price: 999, ram: '4GB', os: 'iOS', imgUrl: '' },
   { id: '2', brand: 'Samsung', model: 'Galaxy S21', price: 799, ram: '8GB', os: 'Android', imgUrl: '' },
   { id: '3', brand: 'Acer', model: 'Iconia', price: 170, ram: '2GB', os: 'Android', imgUrl: '' },
@@ -59,14 +85,14 @@ const mockDevices = [
 const defaultTableConfig = {
   data: mockDevices,
   columns: [
-    { key: 'brand', label: 'Marca', dataType: 'string', sortable: true },
-    { key: 'model', label: 'Modelo', dataType: 'string', sortable: true },
-    { key: 'price', label: 'Precio', dataType: 'number', sortable: true },
+    { key: 'brand' as const, label: 'Marca', dataType: 'string' as const, sortable: true },
+    { key: 'model' as const, label: 'Modelo', dataType: 'string' as const, sortable: true },
+    { key: 'price' as const, label: 'Precio', dataType: 'number' as const, sortable: true },
   ],
   paginated: true,
   pageSize: 10,
   searchable: true,
-  searchableFields: ['brand', 'model', 'os'],
+  searchableFields: ['brand', 'model', 'os'] as (keyof MockDevice)[],
   debounceMs: 300,
   sortable: true,
 };
@@ -85,12 +111,12 @@ describe('useTableState', () => {
 
     it('updates inputValue immediately for UI (without debounce)', () => {
       const { result } = renderHook(() => useTableState(defaultTableConfig));
-      
+
       // Input value se actualiza inmediatamente - sin act/wait
       act(() => {
         result.current.actions.setSearch('test');
       });
-      expect(result.current.state.inputValue).toBe('test'); // ✅ Immediate update
+      expect(result.current.state.inputValue).toBe('test'); // Immediate update
       // search se actualiza después del debounce
     });
 
