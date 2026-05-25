@@ -2,7 +2,7 @@ import type { DeviceDetails } from '../types/device.types';
 
 const DEVICE_API_URL = import.meta.env.VITE_DEVICE_API_URL;
 
-interface ApiDeviceDetails {
+type ApiDeviceDetails = {
   id: string;
   brand: string;
   model: string;

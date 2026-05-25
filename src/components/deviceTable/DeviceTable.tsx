@@ -9,7 +9,7 @@ import { Table } from '../Table/Table';
 import type { Device } from '../../types/device.types';
 import type { Column } from '../../types/table.types';
 
-interface DeviceTableProps {
+type DeviceTableProps = {
   devices: Device[];
 }
 

@@ -2,14 +2,14 @@ import { Component, type ReactNode, type ErrorInfo } from 'react';
 import i18n from '../../i18n';
 import './ErrorBoundary.scss';
 
-interface ErrorBoundaryProps {
+type ErrorBoundaryProps = {
   children: ReactNode;
   fallback?: ReactNode;
   onReset?: () => void;
   level?: 'section' | 'page' | 'full';
 }
 
-interface ErrorBoundaryState {
+type ErrorBoundaryState = {
   hasError: boolean;
 }
 

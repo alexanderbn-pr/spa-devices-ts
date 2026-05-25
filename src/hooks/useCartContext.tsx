@@ -20,7 +20,7 @@ function getInitialCartCount(): number {
   }
 }
 
-interface CartProviderProps {
+type CartProviderProps = {
   children: ReactNode;
 }
 
