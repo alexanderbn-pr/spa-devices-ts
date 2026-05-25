@@ -1,3 +1,71 @@
 {
-  
+  "nav": {
+    "devices": "Devices",
+    "cart": "Cart",
+    "shoppingCart": "Shopping cart"
+  },
+  "cart": {
+    "add": "Add to cart",
+    "adding": "Adding...",
+    "added": "Added to cart",
+    "error": "Error adding to cart"
+  },
+  "search": {
+    "placeholder": "Search device..."
+  },
+  "device": {
+    "viewDetails": "View details",
+    "viewTable": "View table"
+  },
+  "deviceTable": {
+    "title": "Device Table",
+    "subtitle": "View to compare devices",
+    "back": "Back"
+  },
+  "deviceDetails": {
+    "backToDevices": "Back to devices",
+    "processor": "Processor",
+    "ram": "RAM Memory",
+    "storage": "Storage",
+    "os": "Operating System",
+    "display": "Display",
+    "battery": "Battery",
+    "camera": "Main Camera",
+    "dimensions": "Dimensions",
+    "weight": "Weight",
+    "selectColor": "Select color",
+    "selectStorage": "Select storage",
+    "inStock": "In stock - Delivery in 24-48h",
+    "freeShipping": "Free shipping in 24-48 hours",
+    "freePickup": "Free store pickup"
+  },
+  "empty": {
+    "noResults": "No devices found",
+    "noDevices": "No devices available",
+    "clearFilters": "Clear filters"
+  },
+  "loading": "Loading...",
+  "loadingDevices": "Loading devices...",
+  "error": {
+    "retry": "Retry",
+    "reload": "Reload details",
+    "generic": "Something went wrong",
+    "loadingDetails": "There was an error loading the devices"
+  },
+  "common": {
+    "productImage": "Product image",
+    "technicalSpecs": "Technical specifications"
+  },
+  "table": {
+    "searchPlaceholder": "🔍 Search...",
+    "noResults": "No results found",
+    "previous": "← Previous",
+    "next": "Next →",
+    "pageInfo": "Page {{page}} of {{totalPages}} ({{totalResults}} results)"
+  },
+  "language": {
+    "select": "Language",
+    "es": "Español",
+    "en": "English"
+  }
 }

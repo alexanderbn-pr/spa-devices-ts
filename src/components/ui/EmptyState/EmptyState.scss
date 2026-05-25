@@ -1,0 +1,71 @@
+@use '../../../style/mixins.scss' as *;
+
+.empty-state {
+  @include d-flex(column, center, center, 16px);
+  padding: 48px 24px;
+  text-align: center;
+  width: 100%;
+
+  &__icon {
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  &__description {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 320px;
+  }
+
+  &__action {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-primary);
+      color: var(--color-text-light);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  @include respond(phone) {
+    padding: 32px 16px;
+
+    &__icon {
+      font-size: 40px;
+    }
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__description {
+      font-size: 14px;
+    }
+  }
+}

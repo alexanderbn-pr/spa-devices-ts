@@ -1,0 +1,67 @@
+@use '../../style/mixins.scss' as *;
+
+// ─────────────────────────────────────────
+// DeviceTableSkeleton
+// Skeleton for the device table
+// ─────────────────────────────────────────
+
+.device-table-skeleton {
+  width: 100%;
+  padding: 20px;
+}
+
+.skeleton-row {
+  @include d-flex(row, flex-start, center, 12px);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  .skeleton-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .skeleton-text {
+    height: 16px;
+    border-radius: 4px;
+  }
+
+  .skeleton-text-long {
+    width: 70%;
+  }
+
+  .skeleton-text-short {
+    width: 40%;
+  }
+
+  .skeleton-price {
+    width: 80px;
+    height: 20px;
+    border-radius: 4px;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Base shimmer gradient (applied to all skeletons)
+.skeleton-img,
+.skeleton-text,
+.skeleton-price {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e8e8e8 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  pointer-events: none;
+}

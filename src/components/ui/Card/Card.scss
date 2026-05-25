@@ -1,0 +1,84 @@
+@use '../../../style/mixins.scss' as *;
+
+.card {
+  @include d-flex(column, flex-start, flex-start, 0);
+  background: var(--color-surface-light);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &[role='button'] {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__image {
+    @include d-flex(column, center, center, 0);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-light);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &__body {
+    @include d-flex(column, flex-start, flex-start, 8px);
+    padding: 16px;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text-dark);
+    margin: 0;
+    @include text-ellipsis(2);
+  }
+
+  &__description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+    @include text-ellipsis(3);
+  }
+
+  &__footer {
+    @include d-flex(row, space-between, center, 12px);
+    padding: 12px 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    width: 100%;
+  }
+
+  @include respond(tablet) {
+    &__body {
+      padding: 12px;
+    }
+
+    &__title {
+      font-size: 15px;
+    }
+  }
+}

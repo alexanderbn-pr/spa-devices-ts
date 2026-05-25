@@ -1,113 +1,245 @@
 @use './mixins' as *;
 
+/// Apple Design System - Tema basado en Apple
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  // Typography - SF Pro with fallbacks
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.47;
   font-weight: 400;
   color-scheme: light dark;
-  color: --color-text-main;
-  background-color: --color-bg-main;
 
-  --color-bg-main: #242424;
-  --color-text-main: rgba(255, 255, 255, 0.87);
-  --color-primary: #3fa7ff;
-  --color-disabled-bg: #444c56;
-  --color-disabled-text: #b0bec5;
-  --color-border: #ddd;
-  --color-red: rgb(184, 117, 117);
-  --color-header-bg: rgba(0, 0, 0, 0.8);
-  --color-black: black;
-  --color-white: white;
+  // Apple Colors
+  --color-bg-dark: #000000;
+  --color-bg-light: #f5f5f7;
+  --color-text-dark: #1d1d1f;
+  --color-text-light: #ffffff;
+  --color-text-secondary: rgba(0, 0, 0, 0.8);
+  --color-text-tertiary: rgba(0, 0, 0, 0.48);
+
+  // Interactive - Apple Blue (唯一accent color)
+  --color-primary: #0071e3;
+  --color-primary-hover: #0077ed;
+  --color-link: #0066cc;
+  --color-link-bright: #2997ff;
+
+  // Button states
+  --color-btn-default: #fafafc;
+  --color-btn-active: #ededf2;
+  --color-btn-dark: #1d1d1f;
+
+  // Surface
+  --color-surface-dark: #272729;
+  --color-surface-light: #f5f5f7;
+
+  // Utility
+  --color-red: #bf5b5b;
+  --color-green: #34c759;  // Apple Green para stock
+  --color-border: rgba(0, 0, 0, 0.04);
+
+  // Shadows - Apple style (soft, diffused)
+  --shadow-card: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+
+  // Focus
+  --color-focus: #0071e3;
+
+  // Default to light background
+  --color-bg-main: var(--color-bg-light);
+  --color-text-main: var(--color-text-dark);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   display: block;
   margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  display: grid;
-  box-sizing: border-box;
-  grid-template: 'header' 8vh 'main' 92% / 100%;
-
-  header {
-    grid-area: header;
-  }
-  aside {
-    grid-area: sidebar;
-  }
-  main {
-    grid-area: main;
-  }
-  footer {
-    grid-area: footer;
-  }
-}
-
-.root {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 p {
   margin: 0;
 }
 
+/// Typography - Apple Display (20px+)
 h1 {
-  font-size: 3.2em;
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -0.28px;
+}
+
+/// Typography - Section Heading
+h2 {
+  font-size: 40px;
+  font-weight: 600;
   line-height: 1.1;
 }
 
-h2 {
-  font-size: 2.2em;
-  line-height: 1.15;
-}
-
+/// Typography - Tile Heading (28px)
 h3 {
-  font-size: 1.3em;
-  line-height: 1.2;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0.196px;
 }
 
-h4 {
-  font-size: 0.9em;
-  line-height: 1.25;
+/// Typography - Body (17px)
+h4,
+.body-text {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
 }
 
-input {
-  padding: 0.625rem;
-  border: 0.125rem solid --color-border;
-  height: 40%;
+/// Links
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: -0.224px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
 }
 
+/// Buttons - Apple Style
 button {
-  border: 1px solid --color-primary;
-  background: transparent;
-  text-transform: uppercase;
-  padding: 1vw 1vh;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 2.41;
+  padding: 8px 15px;
   border-radius: 8px;
-  color: #fff;
-  font-size: 0.8rem;
-  width: 20vw;
-  font-weight: 600;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition:
-    background 0.2s,
-    box-shadow 0.2s,
-    transform 0.1s;
-  letter-spacing: 0.5px;
-  &:hover:not(:disabled) {
-    background: --color-primary;
-    transform: translateY(-2px) scale(1.03);
+  transition: all 0.2s ease;
+  letter-spacing: normal;
+
+  // Primary CTA
+  &.primary {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+
+    &:hover {
+      background: var(--color-primary-hover);
+      text-decoration: none;
+    }
+
+    &:active {
+      background: var(--color-btn-active);
+    }
+
+    &:disabled {
+      background: var(--color-surface-dark);
+      color: var(--color-text-tertiary);
+      cursor: not-allowed;
+    }
   }
-  &:disabled {
-    background: --color-disabled-bg;
-    color: --color-disabled-text;
-    border: none;
-    cursor: not-allowed;
+
+  // Secondary/Outline
+  &.secondary {
+    background: var(--color-btn-default);
+    color: var(--color-text-dark);
+    border: 1px solid var(--color-border);
+
+    &:hover {
+      background: var(--color-btn-active);
+    }
+
+    &:disabled {
+      background: var(--color-surface-light);
+      color: var(--color-text-tertiary);
+      cursor: not-allowed;
+    }
+  }
+
+  // Focus state
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
   }
 }
+
+/// Inputs - Apple Search Style
+input[type="text"],
+input[type="search"] {
+  font-family: inherit;
+  font-size: 17px;
+  padding: 0px 14px;
+  border-radius: 11px;
+  border: 3px solid var(--color-border);
+  background: var(--color-btn-default);
+  color: var(--color-text-dark);
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+}
+
+/// Select - Apple Style
+select {
+  font-family: inherit;
+  font-size: 17px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-btn-default);
+  color: var(--color-text-dark);
+  cursor: pointer;
+
+  &:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+/// Loading state
 .loading {
   text-align: center;
-  padding-top: 4vh;
+  padding: 4vh;
+  color: var(--color-text-secondary);
+  font-size: 17px;
+}
+
+/// Error state
+.error-message {
+  color: var(--color-red);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.error-state {
+  text-align: center;
+  padding: 48px 24px;
+  @include d-flex(column, center, center, 16px);
 }

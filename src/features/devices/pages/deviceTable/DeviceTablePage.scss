@@ -1,0 +1,81 @@
+@use '../../../../style/mixins.scss' as *;
+
+.device-table-container {
+  @include d-flex(column, flex-start, center, 0);
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  padding: 24px;
+}
+
+.device-table-content {
+  @include d-flex(column, flex-start, flex-start, 24px);
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.device-table-header {
+  @include d-flex(column, flex-start, flex-start, 8px);
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  .header-left {
+    @include d-flex(row, flex-start, center, 16px);
+    
+    h3 {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--color-text-dark);
+      margin: 0;
+    }
+  }
+
+  .header-subtitle {
+    font-size: 17px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-primary);
+      color: var(--color-text-light);
+    }
+
+    &:active {
+      background: var(--color-primary-hover);
+    }
+  }
+}
+
+.table-skeleton {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--color-surface-light);
+  box-shadow: var(--shadow-card);
+}
+
+.error-message {
+  text-align: center;
+  padding: 48px 24px;
+  
+  p {
+    color: var(--color-text-secondary);
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+}

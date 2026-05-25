@@ -1,0 +1,355 @@
+@use '../../../../style/mixins.scss' as *;
+
+.details-view {
+  @include d-flex(row, flex-start, 48px);
+  width: 100%;
+  max-width: 980px;
+  margin: 48px auto 0;
+  padding: 24px;
+  align-items: flex-start;
+
+  &-image {
+    @include d-flex(column, center, center, 16px);
+    width: 50%;
+    min-width: 320px;
+    max-width: 480px;
+    position: relative;
+    align-self: flex-start;
+
+    .image-container {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--color-bg-light);
+      border-radius: 8px;
+      @include d-flex(column, center, center, 0);
+      overflow: hidden;
+
+      img {
+        width: 80%;
+        height: auto;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    .image-price {
+      @include d-flex(row, center, center, 4px);
+      
+      .price-currency {
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--color-text-dark);
+        margin-top: 4px;
+      }
+
+      .price-amount {
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--color-red);
+      }
+    }
+  }
+
+  &-side {
+    @include d-flex(column, flex-start, flex-start, 24px);
+    flex: 1;
+    align-self: flex-start;
+
+    &-header {
+      @include d-flex(column, flex-start, flex-start, 8px);
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+      .product-brand {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .product-model {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--color-text-dark);
+        margin: 0;
+      }
+    }
+
+    &-specs {
+      @include d-flex(column, flex-start, flex-start, 0);
+      width: 100%;
+      padding: 16px 0;
+
+      .spec-row {
+        @include d-flex(row, flex-start, center, 0);
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .spec-label {
+          width: 140px;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--color-text-dark);
+          flex-shrink: 0;
+        }
+
+        .spec-value {
+          flex: 1;
+          font-size: 14px;
+          color: var(--color-text-secondary);
+        }
+      }
+    }
+
+    &-color {
+      @include d-flex(column, flex-start, flex-start, 12px);
+      width: 100%;
+      padding: 16px 0;
+
+      .color-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-dark);
+      }
+
+      .color-options {
+        @include d-flex(row, flex-start, center, 12px);
+
+        .color-swatch {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          cursor: pointer;
+          position: relative;
+          transition: all 0.2s ease;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          &.selected {
+            border-color: var(--color-primary);
+            
+            &::after {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 8px;
+              height: 8px;
+              background: white;
+              border-radius: 50%;
+            }
+          }
+
+          &:focus-visible {
+            outline: 2px solid var(--color-focus);
+            outline-offset: 2px;
+          }
+        }
+      }
+    }
+
+    &-storage {
+      @include d-flex(column, flex-start, flex-start, 12px);
+      width: 100%;
+      padding: 16px 0;
+
+      .storage-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-dark);
+      }
+
+      .storage-options {
+        @include d-flex(row, flex-start, center, 12px);
+
+        .storage-btn {
+          padding: 10px 16px;
+          border-radius: 8px;
+          border: 1px solid var(--color-border);
+          background: var(--color-btn-default);
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--color-text-dark);
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+          }
+
+          &.selected {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+          }
+
+          &:focus-visible {
+            outline: 2px solid var(--color-focus);
+            outline-offset: 2px;
+          }
+        }
+      }
+    }
+
+    &-actions {
+      @include d-flex(column, flex-start, flex-start, 16px);
+      width: 100%;
+      padding: 24px 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+      .stock-status {
+        @include d-flex(row, center, center, 8px);
+        font-size: 14px;
+        color: #34c759;
+
+        &.out-of-stock {
+          color: var(--color-red);
+        }
+
+        .stock-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: currentColor;
+        }
+      }
+
+      .add-to-cart-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 14px 24px;
+        background: var(--color-primary);
+        color: var(--color-text-light);
+        font-size: 17px;
+        font-weight: 400;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.1s ease;
+        @include d-flex(row, center, center, 8px);
+
+        &:hover:not(:disabled) {
+          background: var(--color-primary-hover);
+        }
+
+        &:active:not(:disabled) {
+          transform: scale(0.98);
+        }
+
+        &:disabled {
+          background: var(--color-surface-dark);
+          color: var(--color-text-tertiary);
+          cursor: not-allowed;
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--color-focus);
+          outline-offset: 2px;
+        }
+
+        .btn-icon {
+          font-size: 18px;
+        }
+      }
+
+      .delivery-info {
+        @include d-flex(column, flex-start, flex-start, 8px);
+        padding-top: 12px;
+
+        .delivery-option {
+          @include d-flex(row, center, center, 8px);
+          font-size: 14px;
+          color: var(--color-text-secondary);
+
+          .delivery-icon {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .breadcrumb {
+        padding-top: 16px;
+        
+        a {
+          font-size: 14px;
+          color: var(--color-link);
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond(tablet) {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    gap: 32px;
+
+    &-image {
+      width: 100%;
+      max-width: 400px;
+      min-width: 280px;
+    }
+
+    &-side {
+      width: 100%;
+
+      &-header .product-model {
+        font-size: 28px;
+      }
+
+      &-specs .spec-row {
+        @include d-flex(column, flex-start, flex-start, 4px);
+        
+        .spec-label {
+          width: 100%;
+          font-size: 12px;
+          color: var(--color-text-tertiary);
+        }
+        
+        .spec-value {
+          font-size: 16px;
+        }
+      }
+
+      &-color,
+      &-storage {
+        .color-options,
+        .storage-options {
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+
+  @include respond(phone) {
+    padding: 16px 12px;
+    gap: 24px;
+
+    &-side {
+      &-header .product-model {
+        font-size: 24px;
+      }
+
+      &-actions .add-to-cart-btn {
+        max-width: 100%;
+      }
+    }
+  }
+}
