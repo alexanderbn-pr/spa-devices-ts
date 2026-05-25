@@ -1,6 +1,6 @@
 import { ToastType } from '../../types';
 
-interface ToastProps {
+type ToastProps = {
   id: string;
   type: ToastType;
   message: string;

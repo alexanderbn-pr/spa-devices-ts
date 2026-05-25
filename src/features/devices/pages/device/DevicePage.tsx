@@ -9,7 +9,7 @@ import Search from '../../../../components/search/Search';
 import ErrorBoundary from '../../../../components/error/ErrorBoundary';
 import './device.scss';
 
-interface DeviceContentProps {
+type DeviceContentProps = {
   debouncedSearch: string;
 }
 

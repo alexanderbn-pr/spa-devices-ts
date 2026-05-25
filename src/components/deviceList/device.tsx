@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { Device } from '../../types/device.types';
 
-interface DeviceProps {
+type DeviceProps = {
   device: Device;
 }
 

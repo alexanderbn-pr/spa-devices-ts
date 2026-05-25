@@ -5,7 +5,7 @@ import EmptyState from '../ui/EmptyState';
 import type { Device } from '../../types/device.types';
 import '../deviceList/device-list.scss';
 
-interface DeviceListProps {
+type DeviceListProps = {
   devices: Device[];
   onClearFilters?: () => void;
 }

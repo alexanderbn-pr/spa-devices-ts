@@ -3,7 +3,7 @@ import { useTableState } from '../../hooks/useTableState';
 import type { TableConfig } from '../../types/table.types';
 import './Table.scss';
 
-interface TableProps<T extends Record<string, unknown>> {
+type TableProps<T extends Record<string, unknown>> = {
   config: TableConfig<T>;
 }
 

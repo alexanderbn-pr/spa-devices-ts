@@ -2,7 +2,7 @@ import type { Toast } from '../../types';
 import ToastComponent from './Toast';
 import './Toast.scss';
 
-interface ToastContainerProps {
+type ToastContainerProps = {
   toasts: Toast[];
   onDismiss: (id: string) => void;
 }

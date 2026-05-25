@@ -13,7 +13,7 @@
 import type { ReactNode } from 'react';
 import type { EmptyStateAction } from '../../../types/ui.types';
 
-interface EmptyStateProps {
+type EmptyStateProps = {
   icon?: ReactNode | string;
   title: string;
   description?: string;

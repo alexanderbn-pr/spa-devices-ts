@@ -10,7 +10,7 @@ import type { Toast, ToastContextValue, ShowToastParams } from '../types';
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-interface ToastProviderProps {
+type ToastProviderProps = {
   children: ReactNode;
 }
 

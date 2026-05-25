@@ -2,7 +2,7 @@ import type { AddToCartPayload } from '../types/cart.types';
 
 const DEVICE_API_URL = import.meta.env.VITE_DEVICE_API_URL;
 
-interface ApiCartResponse {
+type ApiCartResponse = {
   count?: number;
 }
 
